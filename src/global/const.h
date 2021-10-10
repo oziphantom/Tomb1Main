@@ -48,7 +48,7 @@
 #define LARA_AIR (1800*ANIM_SCALE)
 
 #define LARA_TURN_UNDO (2 * PHD_DEGREE/ANIM_SCALE) // = 364
-#define LARA_TURN_RATE ((PHD_DEGREE / (4*ANIM_SCALE)) + LARA_TURN_UNDO) // = 409
+#define LARA_TURN_RATE ((PHD_DEGREE / 4/ANIM_SCALE/ANIM_SCALE) + LARA_TURN_UNDO) // = 409 for 60fps people want 1/4 turn speed so it "feels right" 
 #define LARA_SLOW_TURN ((PHD_DEGREE * 2/ANIM_SCALE) + LARA_TURN_UNDO) // = 728
 #define LARA_JUMP_TURN ((PHD_DEGREE * 1/ANIM_SCALE) + LARA_TURN_UNDO) // = 546
 #define LARA_MED_TURN ((PHD_DEGREE * 4/ANIM_SCALE) + LARA_TURN_UNDO) // = 1092
@@ -228,4 +228,11 @@
 #define Rad2Angle (32768.0/3.142)
 #define Angle2Rad  (1.0 / Rad2Angle)
 #define View2World  (double)(1 << W2V_SHIFT)
+
+#if _MSC_VER > 0x500
+    #define strdup _strdup       //fixes error about POSIX function
+    #define _USE_MATH_DEFINES    //makes maths.h also define M_PI
+#endif 
+
+
 #endif
