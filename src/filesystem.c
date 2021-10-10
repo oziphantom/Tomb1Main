@@ -22,7 +22,8 @@ MYFILE *FileOpen(const char *path, FILE_OPEN_MODE mode)
         break;
     }
     if (!file->fp) {
-        fclose(file->fp);
+        //fclose(file->fp); //this will NULL will crash
+        free(file); //this was malloc'd needs to be freed
         return NULL;
     }
     return file;
