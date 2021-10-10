@@ -233,7 +233,8 @@ void LaraSwapMeshExtra()
     if (!Objects[O_LARA_EXTRA].loaded) {
         return;
     }
-    for (int i = 0; i < LM_NUMBER_OF; i++) {
+    int i;
+    for (i = 0; i < LM_NUMBER_OF; i++) {
         Lara.mesh_ptrs[i] = Meshes[Objects[O_LARA_EXTRA].mesh_index + i];
     }
 }
@@ -255,7 +256,8 @@ void AnimateLara(ITEM_INFO *item)
     if (item->frame_number > anim->frame_end) {
         if (anim->number_commands > 0) {
             command = &AnimCommands[anim->command_index];
-            for (int i = 0; i < anim->number_commands; i++) {
+            int i;
+            for (i = 0; i < anim->number_commands; i++) {
                 switch (*command++) {
                 case AC_MOVE_ORIGIN:
                     TranslateItem(item, command[0], command[1], command[2]);
@@ -302,7 +304,8 @@ void AnimateLara(ITEM_INFO *item)
 
     if (anim->number_commands > 0) {
         command = &AnimCommands[anim->command_index];
-        for (int i = 0; i < anim->number_commands; i++) {
+        int i;
+        for (i = 0; i < anim->number_commands; i++) {
             switch (*command++) {
             case AC_MOVE_ORIGIN:
                 command += 3;
@@ -359,8 +362,6 @@ void AnimateLara(ITEM_INFO *item)
 	else // ANIM_SCALE = 2
 	{
 		if (item->gravity_status) {
-			int32_t currentSpeed = item->speed;
-			int32_t currentFallSpeed = item->fall_speed;
 			
 			double speed = (double)(anim->velocity + anim->acceleration)/ANIM_SCALE * (((item->frame_number - anim->frame_base) / (double)ANIM_SCALE) - 1.0);
 			
@@ -375,7 +376,6 @@ void AnimateLara(ITEM_INFO *item)
 			item->fall_speed = lara_fall_speed_f;
 			item->speed = lara_speed_F;
 			frameCounter += 1;
-			//LOG_DEBUG("%d - s %d f %d -> %d %d : y %d,%d,%d", frameCounter, currentSpeed, currentFallSpeed,item->speed, item->fall_speed, (int32_t)lara_float_pos.x,(int32_t)lara_float_pos.y,(int32_t)lara_float_pos.z); 
 			
 		} else {
 			frameCounter = 0;
@@ -589,7 +589,8 @@ void InitialiseLaraInventory(int32_t level_num)
         GlobalItemReplace(O_MAGNUM_ITEM, O_MAG_AMMO_ITEM);
     } else {
         int32_t ammo = start->magnum_ammo / MAGNUM_AMMO_QTY;
-        for (int i = 0; i < ammo; i++) {
+        int i;
+        for (i = 0; i < ammo; i++) {
             Inv_AddItem(O_MAG_AMMO_ITEM);
         }
         Lara.magnums.ammo = 0;
@@ -601,7 +602,8 @@ void InitialiseLaraInventory(int32_t level_num)
         GlobalItemReplace(O_UZI_ITEM, O_UZI_AMMO_ITEM);
     } else {
         int32_t ammo = start->uzi_ammo / UZI_AMMO_QTY;
-        for (int i = 0; i < ammo; i++) {
+        int i;
+        for (i = 0; i < ammo; i++) {
             Inv_AddItem(O_UZI_AMMO_ITEM);
         }
         Lara.uzis.ammo = 0;
@@ -613,21 +615,22 @@ void InitialiseLaraInventory(int32_t level_num)
         GlobalItemReplace(O_SHOTGUN_ITEM, O_SG_AMMO_ITEM);
     } else {
         int32_t ammo = start->shotgun_ammo / SHOTGUN_AMMO_QTY;
-        for (int i = 0; i < ammo; i++) {
+        int i;
+        for (i = 0; i < ammo; i++) {
             Inv_AddItem(O_SG_AMMO_ITEM);
         }
         Lara.shotgun.ammo = 0;
     }
-
-    for (int i = 0; i < start->num_scions; i++) {
+    int i;
+    for (i = 0; i < start->num_scions; i++) {
         Inv_AddItem(O_SCION_ITEM);
     }
 
-    for (int i = 0; i < start->num_medis; i++) {
+    for (i = 0; i < start->num_medis; i++) {
         Inv_AddItem(O_MEDI_ITEM);
     }
 
-    for (int i = 0; i < start->num_big_medis; i++) {
+    for (i = 0; i < start->num_big_medis; i++) {
         Inv_AddItem(O_BIGMEDI_ITEM);
     }
 
@@ -642,9 +645,10 @@ void InitialiseLaraInventory(int32_t level_num)
 void LaraInitialiseMeshes(int32_t level_num)
 {
     START_INFO *start = &SaveGame.start[level_num];
+    int i;
 
-    if (start->costume) {
-        for (int i = 0; i < LM_NUMBER_OF; i++) {
+    if (start->costume) {        
+        for (i = 0; i < LM_NUMBER_OF; i++) {
             int32_t use_orig_mesh = i == LM_HEAD;
             Lara.mesh_ptrs[i] = Meshes
                 [Objects[use_orig_mesh ? O_LARA : O_LARA_EXTRA].mesh_index + i];
@@ -652,7 +656,7 @@ void LaraInitialiseMeshes(int32_t level_num)
         return;
     }
 
-    for (int i = 0; i < LM_NUMBER_OF; i++) {
+    for (i = 0; i < LM_NUMBER_OF; i++) {
         Lara.mesh_ptrs[i] = Meshes[Objects[O_LARA].mesh_index + i];
     }
 
@@ -730,7 +734,8 @@ void LaraCheatGetStuff()
         Lara.uzis.ammo = SaveGame.bonus_flag & GBF_NGPLUS ? 10001 : 2000;
     }
 
-    for (int i = 0; i < 10; i++) {
+    int i;
+    for (i = 0; i < 10; i++) {
         if (Objects[O_MEDI_OPTION].loaded
             && Inv_RequestItem(O_MEDI_ITEM) < 240) {
             Inv_AddItem(O_MEDI_ITEM);
