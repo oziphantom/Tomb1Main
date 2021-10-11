@@ -68,6 +68,7 @@ static GAME_STRING_ID StringToGameStringID(const char *str)
         { "DETAIL_UI_TEXT_SCALE_FMT", GS_DETAIL_UI_TEXT_SCALE_FMT },
         { "DETAIL_UI_BAR_SCALE_FMT", GS_DETAIL_UI_BAR_SCALE_FMT },
         { "DETAIL_VIDEO_MODE_FMT", GS_DETAIL_VIDEO_MODE_FMT },
+        { "DETAIL_VIDEO_FPS_RATE", GS_DETAIL_VIDEO_FPS_RATE },
         { "SOUND_SET_VOLUMES", GS_SOUND_SET_VOLUMES },
         { "CONTROL_DEFAULT_KEYS", GS_CONTROL_DEFAULT_KEYS },
         { "CONTROL_USER_KEYS", GS_CONTROL_USER_KEYS },
@@ -164,7 +165,7 @@ static int8_t S_LoadScriptMeta(struct json_object_s *obj)
         LOG_ERROR("'demo_delay' must be a positive number");
         return 0;
     }
-    GF.demo_delay = tmp_d * FRAMES_PER_SECOND * 2; //2 here as ANIM_SCALE won't have been set properly yet and title screen is 60FPS
+    GF.demo_delay = tmp_d * FRAMES_PER_SECOND *2;
 
     tmp_i = json_object_get_bool(obj, "enable_game_modes", JSON_INVALID_BOOL);
     if (tmp_i == JSON_INVALID_BOOL) {
@@ -591,8 +592,6 @@ static int8_t S_LoadScriptLevels(struct json_object_s *obj)
         if (tmp_i != JSON_INVALID_BOOL) {
             cur->demo = tmp_i;
             GF.has_demo |= tmp_i;
-        } else {
-            cur->demo = 0; // initilise this to sane value
         }
 
         struct json_object_s *jlbl_strings_obj =
