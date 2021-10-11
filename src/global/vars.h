@@ -297,5 +297,6 @@ extern int16_t BarOffsetY[6];
 
 extern int32_t LaraSpeedError;
 extern int16_t ANIM_SCALE;
+extern int GoldMode; //0 if normal, 1 if playing unfinished business
 
 #endif

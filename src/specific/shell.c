@@ -36,6 +36,7 @@ void GameMain()
     GameHiRes = 0;
     ScreenSizer = 1.0;
     GameSizer = 1.0;
+    GoldMode = 0; //asume normal
 
     const char *gameflow_path = "cfg/Tomb1Main_gameflow.json5";
 
@@ -45,6 +46,7 @@ void GameMain()
     for (int i = 0; i < arg_count; i++) {
         if (!strcmp(args[i], "-gold")) {
             gameflow_path = "cfg/Tomb1Main_gameflow_ub.json5";
+            GoldMode = 1;
         }
     }
 
@@ -142,7 +144,7 @@ void GameMain()
 			ClockInit();
             T_InitPrint();
             TempVideoAdjust(2, 1.0);
-            S_DisplayPicture("data\\titleh");
+            S_DisplayPicture(GoldMode ? "data\\titleub" : "data\\titleh");
             NoInputCount = 0;
             if (!InitialiseLevel(GF.title_level_num, GFL_TITLE)) {
                 gf_option = GF_EXIT_GAME;
