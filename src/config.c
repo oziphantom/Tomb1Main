@@ -31,7 +31,7 @@
 #define READ_BAR_COLOR(opt, default_value)                                     \
     READ_CUSTOM(ReadBarColor, opt, default_value)
 
-struct T1MConfig_s T1MConfig;
+T1MConfigStruct T1MConfig = { 0 };
 
 static int8_t ReadBarShowingMode(
     struct json_object_s *obj, const char *name, int8_t default_value)
