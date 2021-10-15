@@ -71,6 +71,4 @@ extern T1MConfigStruct T1MConfig;
 int8_t T1MReadConfigFromJson(const char *json);
 int8_t T1MReadConfig();
 
-extern struct T1MConfig_s T1MConfig;
-
 #endif
