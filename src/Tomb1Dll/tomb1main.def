@@ -362,7 +362,7 @@ HWR_Draw2DQuad
 HWR_DrawLightningSegment 
 HWR_DrawTranslucentQuad 
 HWR_DumpScreen 
-HWR_Error 
+HWR_CheckError 
 HWR_FlipPrimaryBuffer 
 HWR_RenderBegin 
 HWR_RenderEnd 
@@ -1758,6 +1758,6 @@ phd_atan
 phd_cos 
 phd_sin 
 phd_sqrt 
-visible_zclip 
+phd_VisibleZClip 
 xLOS 
 zLOS 
